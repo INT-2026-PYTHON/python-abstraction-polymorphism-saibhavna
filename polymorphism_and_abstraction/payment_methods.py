@@ -59,3 +59,50 @@ Explanation:
 =================================================
 
 """
+
+class CreditCard:
+    def __init__(self, name, card_number):
+        self.name = name
+        self.card_number = card_number
+
+    def pay(self, amount):
+        print(f"[CreditCard] {self.name} paid {amount} via card {self.card_number}")
+
+
+class UPI:
+    def __init__(self, upi_id):
+        self.upi_id = upi_id
+
+    def pay(self, amount):
+        print(f"[UPI] {self.upi_id} paid {amount}")
+
+
+class Cash:
+    def __init__(self, name):
+        self.name = name
+
+    def pay(self, amount):
+        print(f"[Cash] {self.name} paid {amount} in cash")
+
+
+def checkout(payment_method, amount):
+    payment_method.pay(amount)
+
+
+amount = float(input("Enter amount: "))
+
+methods = []
+
+name = input("Enter card holder name: ")
+card = input("Enter card number: ")
+methods.append(CreditCard(name, card))
+
+upi_id = input("Enter UPI ID: ")
+methods.append(UPI(upi_id))
+
+cash_name = input("Enter cash payer name: ")
+methods.append(Cash(cash_name))
+
+print("\nPayment Details:")
+for m in methods:
+    checkout(m, amount)
